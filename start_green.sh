@@ -8,28 +8,25 @@ GREENBOX_VER=4.3.5
 
 SERVER_NAME=greenbox-scw-0
 
-SERVER_ID=`scw ps | grep "running.*$SERVER_NAME" | awk '{print $1}'`
 
-while [ -z "$SERVER_ID" ]
-do
-  echo starting $SERVER_NAME
-
-  SERVER_STOPPING=`scw ps -a | grep "stopping.*$SERVER_NAME" | awk '{print $1}'`
-  while [ ! -z "$SERVER_STOPPING" ] ; do
+SERVER_STOPPING=`scw ps -a | grep "stopping.*$SERVER_NAME" | awk '{print $1}'`
+while [ ! -z "$SERVER_STOPPING" ] ; do
      echo "$SERVER_NAME is in stopping process ... waiting 30sec ..."
      sleep 30
      SERVER_STOPPING=`scw ps -a | grep "stopping.*$SERVER_NAME" | awk '{print $1}'`
-  done
-
-  echo scw start $SERVER_NAME
-  scw start $SERVER_NAME
-  echo sleep 10 ...
-  sleep 10
-  SERVER_ID=`scw ps | grep "running.*$SERVER_NAME" | awk '{print $1}'`
-
 done
 
-scw restart $SERVER_ID
+
+SERVER_ID=`scw ps | grep "running.*$SERVER_NAME" | awk '{print $1}'`
+if [ -z "$SERVER_ID" ]
+then
+  SERVER_ID=`scw ps -a | grep "$SERVER_NAME" | awk '{print $1}'`
+  echo starting $SERVER_ID
+  scw start $SERVER_ID
+else
+  echo restarting $SERVER_ID
+  scw restart $SERVER_ID
+fi
 
 ./scw-ipxe-start.expect $SERVER_ID "initrd ${ISO_PATH}/greenbox-${GREENBOX_VER}.iso" "chain http://boot.salstar.sk/memdisk iso raw"
 
