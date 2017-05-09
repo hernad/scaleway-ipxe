@@ -44,8 +44,11 @@ expect {
 
 
 expect {
-  -r "boot:|bboooott::" { send "rack SCALEWAY=1\r" } 
+  -r "boot:|boooott::" { send "rack SCALEWAY=1\r" } 
 }
+
+expect "Core Linux" { puts "greenbox login yeaah" ; exit }
+
 
 # Drop shell
 set timeout -1
