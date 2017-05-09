@@ -4,7 +4,7 @@ ISO_PATH=http://dl.bintray.com/hernad/greenbox
 ISO_PATH=http://download.bring.out.ba
 ISO_PATH=http://212.47.245.111
 
-GREENBOX_VER=4.3.5
+GREENBOX_VER=4.4.0
 
 SERVER_NAME=greenbox-scw-0
 

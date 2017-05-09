@@ -42,8 +42,9 @@ expect {
   -re "Operation not permitted|No such file or directory" { puts "ISO ${initrd} ERROR" ; exit }
 }
 
-
 expect {
+  "MEMDISK: No ramdisk image specified!" { puts "initrd ERROR" ; exit }
+
   -r "boot:|boooott::" { send "rack SCALEWAY=1\r" } 
 }
 
