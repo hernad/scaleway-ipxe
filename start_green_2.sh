@@ -5,11 +5,11 @@ ISO_PATH=http://download.bring.out.ba
 #ISO_PATH=http://212.47.245.111
 ISO_PATH=http://45.76.84.237
 
-SERVER_TYPE=C
+#SERVER_TYPE=C
 GREENBOX_VER=4.5.9
-SERVER_NAME=greenbox-scw-0
+SERVER_NAME=greenbox-scw-2
 #REGION=ams1
-SERVER_IP=51.15.62.134
+#SERVER_IP=51.15.62.134
 
 function server_restart() {
 
@@ -46,11 +46,11 @@ fi
 
 }
 
-if [ "$REGION" == "ams1" ] ; then
-  server_restart ssh
-else 
+#if [ "$REGION" == "ams1" ] ; then
+#  server_restart ssh
+#else 
   server_restart 
-fi
+#fi
 
 
 echo "SERVER_ID=$SERVER_ID"
